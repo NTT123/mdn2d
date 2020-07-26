@@ -3,7 +3,10 @@
 import tqdm
 
 
-def train_one_epoch(epoch, model, dataloader, optimizer, lr_scheduler, device, hx, logger):
+def train_one_epoch(epoch, model, dataloader, optimizer, lr_scheduler, device,
+                    hx, logger):
+    model.train()
+
     for batch in tqdm.tqdm(dataloader, desc=f"epoch {epoch}"):
         inp = batch.to(device)
         output = model(hx)

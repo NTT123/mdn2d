@@ -2,12 +2,12 @@
 
 from argparse import ArgumentParser
 
+import matplotlib.pyplot as plt
 import torch
 from torch.optim import SGD
 from torch.optim.lr_scheduler import OneCycleLR
 from torch.utils.data import DataLoader
 
-import matplotlib.pyplot as plt
 from dataset import MixtureDataset
 from logger import Logger
 from model import MDN
@@ -50,11 +50,11 @@ def main():
     logger = Logger('./log')
 
     for epoch in range(args.num_epochs):
-        train_one_epoch(epoch, model, data_loader,
-                        optimizer, lr_scheduler, device, hx_, logger)
+        train_one_epoch(epoch, model, data_loader, optimizer, lr_scheduler,
+                        device, hx_, logger)
         logger.plot(f'log_{epoch}.png')
-        plot_mdn_density(model, hx, dataset.data,
-                         device, f'log/density_{epoch}.png')
+        plot_mdn_density(model, hx, dataset.data, device,
+                         f'log/density_{epoch}.png')
 
     pred = torch.chunk(model(hx), chunks=6, dim=-1)
     weight = pred[-1]

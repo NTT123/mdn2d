@@ -3,10 +3,10 @@
 import random
 from pathlib import Path
 
-import numpy as np
-
 import h5py
+import numpy as np
 import torch
+from torch.distributions import MultivariateNormal
 
 DATA_DIRNAME = Path('./data')
 
@@ -36,11 +36,8 @@ def _generate_data(N, num_mixtures):
     means = 20 * (torch.rand(num_mixtures, 2) - 0.5)
     covs = [torch.randn(2, 2) for _ in range(num_mixtures)]
     covs = [torch.matmul(A, A.t()) + 0.1 * torch.eye(2) for A in covs]
-    Zs = [
-        torch.distributions.MultivariateNormal(loc=means[c],
-                                               covariance_matrix=covs[c])
-        for c in range(num_mixtures)
-    ]
+    Zs = [MultivariateNormal(loc=means[c], covariance_matrix=covs[c])
+          for c in range(num_mixtures)]
 
     # Generate data
     choices = np.random.choice(range(num_mixtures), size=N, p=weights.numpy())

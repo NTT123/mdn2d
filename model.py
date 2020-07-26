@@ -27,8 +27,7 @@ class MDN(torch.nn.Module):
         scaled_u = rotated_u / logstdx.exp()
         scaled_v = rotated_v / logstdy.exp()
 
-        llh = -(0.5 * torch.pow(scaled_u, 2) +
-                0.5 * torch.pow(scaled_v, 2) +
+        llh = -(0.5 * torch.pow(scaled_u, 2) + 0.5 * torch.pow(scaled_v, 2) +
                 logstdx + logstdy + math.log(math.pi * 2))
 
         weight = torch.nn.functional.log_softmax(weight, dim=-1)
