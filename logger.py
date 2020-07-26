@@ -26,9 +26,11 @@ class Logger:
         plt.close()
         log = list(self.log.items())
         L = len(log)
-        plt.figure(figsize=(10, 4*L))
+        plt.figure(figsize=(15, 2*L))
         for i, (k, v) in enumerate(log):
             plt.subplot(L, 1, i+1)
             plt.plot(v)
             plt.title(k)
+        plt.subplots_adjust(hspace=0.5)
+
         plt.savefig(str(self.root_dirname/output_file))

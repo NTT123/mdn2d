@@ -20,7 +20,7 @@ def main():
     parser.add_argument('--num-mixtures', default=10, type=int)
     parser.add_argument('--num-data-mixtures', default=5, type=int)
     parser.add_argument('--batch-size', default=128, type=int)
-    parser.add_argument('--learning-rate', default=1e-3, type=float)
+    parser.add_argument('--learning-rate', default=1e-4, type=float)
     parser.add_argument('--num-epochs', default=10, type=int)
     parser.add_argument('--hidden-dim', default=128, type=int)
     parser.add_argument('--seed', default=42, type=int)

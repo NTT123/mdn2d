@@ -33,7 +33,7 @@ def plot_mdn_density(model, hx, D, device, output_file):
     z = p.view(200, 200).exp().double().data.cpu().numpy()
     z = z[:-1, :-1]
     z_min, z_max = 0., np.abs(z).max()
-    fig = plt.figure(figsize=(10, 5))
+    fig = plt.figure(figsize=(15, 4))
     plt.subplot(1, 2, 1)
     ax = plt.gca()
     c = ax.pcolormesh(x, y, z, cmap='jet', vmin=z_min, vmax=z_max)
