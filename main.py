@@ -38,8 +38,8 @@ def main():
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     model = MDN(hidden_dim=args.hidden_dim, num_mixtures=args.num_mixtures)
     model = model.to(device)
-    hx = torch.randn(1, args.hidden_dim)
-    hx_ = hx.repeat(args.batch_size, 1).to(device).data
+    hx = torch.randn(1, args.hidden_dim).to(device)
+    hx_ = hx.repeat(args.batch_size, 1)
 
     optimizer = SGD(model.parameters(), lr=args.learning_rate)
     lr_scheduler = OneCycleLR(optimizer=optimizer,
